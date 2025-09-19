@@ -3,356 +3,877 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Web Page</title>
+    <title>Gadgets Collective - Home</title>
     <style>
+        /* Global Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
         body {
-            background-color: #f5f7fa;
+            background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
         }
-
-        header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            padding: 1.5rem 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
-
-        nav {
-            background-color: #fff;
-            padding: 1rem;
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
         nav ul {
             display: flex;
-            justify-content: center;
             list-style: none;
         }
-
-        nav li {
-            margin: 0 1.5rem;
+        
+        nav ul li {
+            margin-left: 1.5rem;
         }
-
-        nav a {
-            text-decoration: none;
-            color: #4a5568;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: #6a11cb;
+        
+        nav ul li a {
             color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
         }
-
-        section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        
+        .active {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
         }
-
-        h2 {
-            color: #2d3748;
+        
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: white;
+            margin-bottom: 5px;
+            border-radius: 2px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        /* Featured Products */
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 0.5rem auto;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text h2 {
+            color: var(--dark-color);
             margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
         }
-
+        
+        /* Contact Form */
+        .contact {
+            padding: 4rem 0;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
         .form-group {
             margin-bottom: 1.5rem;
         }
-
-        label {
+        
+        .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            color: #4a5568;
         }
-
-        input, textarea, select {
+        
+        .form-control {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #cbd5e0;
-            border-radius: 5px;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             font-size: 1rem;
-            transition: border-color 0.3s;
         }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #6a11cb;
-            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
         }
-
+        
         .error {
-            color: #e53e3e;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
             display: none;
         }
-
-        button {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
             color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            padding: 3rem 0 1rem;
         }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
         }
-
-        .counter {
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-icons {
             display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
+            gap: 1rem;
+            margin-top: 1rem;
         }
-
-        .counter button {
-            width: 40px;
-            height: 40px;
+        
+        .social-icons a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            padding: 0;
+            transition: background 0.3s;
         }
-
-        .counter span {
-            margin: 0 1rem;
-            font-size: 1.5rem;
-            min-width: 50px;
+        
+        .social-icons a:hover {
+            background: var(--secondary-color);
+        }
+        
+        .footer-bottom {
             text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .theme-switcher {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-            margin-right: 1rem;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #6a11cb;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        .dark-mode {
-            background-color: #1a202c;
-            color: #e2e8f0;
-        }
-
-        .dark-mode section {
-            background-color: #2d3748;
-        }
-
-        .dark-mode h2 {
-            color: #e2e8f0;
-            border-bottom-color: #4a5568;
-        }
-
-        .dark-mode input, .dark-mode textarea, .dark-mode select {
-            background-color: #2d3748;
-            border-color: #4a5568;
-            color: #e2e8f0;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background-color: #2d3748;
-            color: #e2e8f0;
-            margin-top: 2rem;
-        }
-
-        .success-message {
-            background-color: #c6f6d5;
-            color: #2d7048;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 1rem;
-            display: none;
-        }
-
+        
+        /* Responsive Styles */
         @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
+            .menu-toggle {
+                display: flex;
             }
             
-            nav li {
-                margin: 0.5rem 0;
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary-color);
+                flex-direction: column;
+                padding: 1rem 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
             }
+            
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 1rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Page Styles */
+        .page {
+            display: none;
+            padding: 2rem 0;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Slider Styles */
+        .slider {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .slide {
+            min-width: 100%;
+        }
+        
+        .slide img {
+            width: 100%;
+            display: block;
+        }
+        
+        .slider-controls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .slider-controls button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+        
+        .slider-controls button.active {
+            background: white;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .slider-nav:hover {
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .prev {
+            left: 15px;
+        }
+        
+        .next {
+            right: 15px;
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Interactive Web Page</h1>
-    </header>
-    
-    <nav>
-        <ul>
-            <li><a href="#form-section">Contact Form</a></li>
-            <li><a href="#counter-section">Counter</a></li>
-            <li><a href="#theme-section">Theme Switcher</a></li>
-        </ul>
-    </nav>
-    
-    <div class="container">
-        <section id="form-section">
-            <h2>Contact Form</h2>
-            <form id="contact-form">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="Enter your full name">
-                    <div class="error" id="name-error">Please enter your name</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter your email">
-                    <div class="error" id="email-error">Please enter a valid email address</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" placeholder="Enter your phone number">
-                    <div class="error" id="phone-error">Please enter a valid phone number</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
-                    <div class="error" id="message-error">Please enter a message</div>
-                </div>
-                
-                <button type="submit">Submit Form</button>
-                
-                <div class="success-message" id="form-success">
-                    Form submitted successfully! Thank you for your message.
-                </div>
-            </form>
-        </section>
-        
-        <section id="counter-section">
-            <h2>Interactive Counter</h2>
-            <p>Use the buttons below to increment or decrement the counter value:</p>
-            
-            <div class="counter">
-                <button id="decrement-btn">-</button>
-                <span id="counter-value">0</span>
-                <button id="increment-btn">+</button>
+        <div class="container header-container">
+            <a href="#" class="logo">Gadgets <span>Collective</span></a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            
-            <button id="reset-counter">Reset Counter</button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+                    <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Discover the Latest Tech Gadgets</h1>
+                <p>Explore our curated collection of innovative gadgets that will transform your digital experience.</p>
+                <a href="#about" class="btn nav-link" data-page="about">Learn More</a>
+            </div>
         </section>
-        
-        <section id="theme-section">
-            <h2>Theme Switcher</h2>
-            <p>Toggle between light and dark mode:</p>
-            
-            <div class="theme-switcher">
-                <label class="switch">
-                    <input type="checkbox" id="theme-toggle">
-                    <span class="slider"></span>
-                </label>
-                <span id="theme-status">Light Mode</span>
+
+        <!-- Featured Products -->
+        <section class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Wireless Headphones">
+                    </div>
+                    <div class="product-info">
+                        <h3>Wireless Headphones</h3>
+                        <p>Premium sound quality with noise cancellation</p>
+                        <p class="price">$199.99</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Smart Watch">
+                    </div>
+                    <div class="product-info">
+                        <h3>HD Camera</h3>
+                        <p>Track your Adventures and stay connected</p>
+                        <p class="price">$249.99</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Wireless Earbuds">
+                    </div>
+                    <div class="product-info">
+                        <h3>Smart Watch</h3>
+                        <p>Track your Fitness and Stay Connected</p>
+                        <p class="price">$129.99</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Portable Speaker">
+                    </div>
+                    <div class="product-info">
+                        <h3>Ear Buds</h3>
+                        <p>Powerful sound in a compact design</p>
+                        <p class="price">$89.99</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Slider -->
+        <section class="container">
+            <h2 class="section-title">New Arrivals</h2>
+            <div class="slider">
+                <div class="slides">
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Smart Home Devices">
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1468436139062-f60a71c5c892?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="VR Headset">
+                    </div>
+                    <div class="slide">
+                        <img src="https://images.unsplash.com/photo-1530893609608-32a9af3aa95c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Drone">
+                    </div>
+                </div>
+                <button class="slider-nav prev">&#10094;</button>
+                <button class="slider-nav next">&#10095;</button>
+                <div class="slider-controls">
+                    <button class="slider-dot active" data-slide="0"></button>
+                    <button class="slider-dot" data-slide="1"></button>
+                    <button class="slider-dot" data-slide="2"></button>
+                </div>
             </div>
         </section>
     </div>
-    
+
+    <!-- About Page -->
+    <div id="about" class="page">
+        <section class="container">
+            <h2 class="section-title">About Gadgets Collective</h2>
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Our Team">
+                </div>
+                <div class="about-text">
+                    <h2>We're Passionate About Technology</h2>
+                    <p>Gadgets Collective was founded in 2015 with a simple mission: to bring the latest and most innovative tech gadgets to enthusiasts around the world.</p>
+                    <p>Our team of tech experts carefully selects each product in our collection, ensuring that we offer only the highest quality and most cutting-edge devices.</p>
+                    <p>Whether you're looking for smart home devices, wearable tech, or the latest audio innovations, we've got you covered with products that combine functionality, design, and value.</p>
+                    <a href="#contact" class="btn nav-link" data-page="contact">Get In Touch</a>
+                </div>
+            </div>
+            
+            <div class="values" style="margin-top: 4rem;">
+                <h2 class="section-title">Our Values</h2>
+                <div class="products">
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h3>Innovation</h3>
+                            <p>We constantly seek out the latest technological advancements to bring you products that are ahead of the curve.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h3>Quality</h3>
+                            <p>Every product in our collection undergoes rigorous testing to ensure it meets our high standards.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h3>Customer Satisfaction</h3>
+                            <p>We're committed to providing exceptional service and support to all our customers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page">
+        <section class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Your Name">
+                        <div class="error" id="nameError">Please enter your name</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="Your Email">
+                        <div class="error" id="emailError">Please enter a valid email address</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" class="form-control" placeholder="Subject">
+                        <div class="error" id="subjectError">Please enter a subject</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="Your Message"></textarea>
+                        <div class="error" id="messageError">Please enter your message</div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+            
+            <div class="contact-info" style="margin-top: 3rem; text-align: center;">
+                <h2 class="section-title">Other Ways to Reach Us</h2>
+                <div class="products">
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h3>Email</h3>
+                            <p>info@:gadgetscollective211@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h3>Phone</h3>
+                            <p>+211-926-654-869</p>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-info">
+                            <h3>Address</h3>
+                            <p>123 Bitco Building, JUba Town</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Interactive Web Page. All rights reserved.</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Gadgets Collective</h3>
+                    <p>Bringing you the latest and greatest in tech gadgets since 2015.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f">f</i></a>
+                        <a href="#"><i class="fab fa-twitter">t</i></a>
+                        <a href="#"><i class="fab fa-instagram">i</i></a>
+                        <a href="#"><i class="fab fa-linkedin-in">l</i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+                        <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li>123 Bitco Building, Juba Town</li>
+                        <li>+211-926-654-869</li>
+                        <li>info@:gadgetscollective211@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gadgets Collective. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Form Validation
+        // Navigation functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const contactForm = document.getElementById('contact-form');
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const phoneInput = document.getElementById('phone');
-            const messageInput = document.getElementById('message');
-            const nameError = document.getElementById('name-error');
-            const emailError = document.getElementById('email-error');
-            const phoneError = document.getElementById('phone-error');
-            const messageError = document.getElementById('message-error');
-            const formSuccess = document.getElementById('form-success');
-
-            /**
-             * Validates the contact form inputs
-             * @returns {boolean} True if form is valid, false otherwise
-             */
-            function validateForm() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const menuToggle = document.getElementById('menuToggle');
+            const navMenu = document.getElementById('navMenu');
+            
+            // Handle navigation clicks
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Update active page
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === targetPage) {
+                            page.classList.add('active');
+                        }
+                    });
+                    
+                    // Update active nav link
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    navMenu.classList.remove('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // Image slider functionality
+            const slides = document.querySelector('.slides');
+            const slideItems = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            
+            let currentSlide = 0;
+            const slideCount = slideItems.length;
+            
+            // Set initial slide position
+            function setSlidePosition() {
+                slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            
+            // Update active dot
+            function updateDots() {
+                dots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Go to specific slide
+            function goToSlide(slideIndex) {
+                currentSlide = slideIndex;
+                setSlidePosition();
+                updateDots();
+            }
+            
+            // Next slide
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slideCount;
+                setSlidePosition();
+                updateDots();
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                setSlidePosition();
+                updateDots();
+            }
+            
+            // Set up event listeners for slider
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+            
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    goToSlide(slideIndex);
+                });
+            });
+            
+            // Auto advance slides
+            setInterval(nextSlide, 5000);
+            
+            // Form validation
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
                 let isValid = true;
                 
                 // Validate name
+                const nameInput = document.getElementById('name');
+                const nameError = document.getElementById('nameError');
+                
                 if (nameInput.value.trim() === '') {
                     nameError.style.display = 'block';
                     isValid = false;
@@ -361,24 +882,32 @@
                 }
                 
                 // Validate email
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(emailInput.value.trim())) {
+                const emailInput = document.getElementById('email');
+                const emailError = document.getElementById('emailError');
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                
+                if (!emailPattern.test(emailInput.value)) {
                     emailError.style.display = 'block';
                     isValid = false;
                 } else {
                     emailError.style.display = 'none';
                 }
                 
-                // Validate phone (basic validation)
-                const phoneRegex = /^[\d\s\-\(\)\+]+$/;
-                if (phoneInput.value.trim() !== '' && !phoneRegex.test(phoneInput.value)) {
-                    phoneError.style.display = 'block';
+                // Validate subject
+                const subjectInput = document.getElementById('subject');
+                const subjectError = document.getElementById('subjectError');
+                
+                if (subjectInput.value.trim() === '') {
+                    subjectError.style.display = 'block';
                     isValid = false;
                 } else {
-                    phoneError.style.display = 'none';
+                    subjectError.style.display = 'none';
                 }
                 
                 // Validate message
+                const messageInput = document.getElementById('message');
+                const messageError = document.getElementById('messageError');
+                
                 if (messageInput.value.trim() === '') {
                     messageError.style.display = 'block';
                     isValid = false;
@@ -386,96 +915,12 @@
                     messageError.style.display = 'none';
                 }
                 
-                return isValid;
-            }
-            
-            // Handle form submission
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                if (validateForm()) {
-                    // In a real application, you would send the form data to a server here
-                    // For demonstration, we'll just show a success message
-                    formSuccess.style.display = 'block';
-                    
-                    // Reset form after successful submission
-                    setTimeout(function() {
-                        contactForm.reset();
-                        formSuccess.style.display = 'none';
-                    }, 3000);
+                // If form is valid, show success message
+                if (isValid) {
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
                 }
             });
-
-            // Interactive Counter
-            const counterValue = document.getElementById('counter-value');
-            const incrementBtn = document.getElementById('increment-btn');
-            const decrementBtn = document.getElementById('decrement-btn');
-            const resetCounter = document.getElementById('reset-counter');
-            
-            let count = 0;
-            
-            /**
-             * Updates the counter display with the current count
-             */
-            function updateCounter() {
-                counterValue.textContent = count;
-                
-                // Change color based on value
-                if (count > 0) {
-                    counterValue.style.color = '#2d7048';
-                } else if (count < 0) {
-                    counterValue.style.color = '#c53030';
-                } else {
-                    counterValue.style.color = '#2d3748';
-                }
-            }
-            
-            // Increment counter
-            incrementBtn.addEventListener('click', function() {
-                count++;
-                updateCounter();
-            });
-            
-            // Decrement counter
-            decrementBtn.addEventListener('click', function() {
-                count--;
-                updateCounter();
-            });
-            
-            // Reset counter
-            resetCounter.addEventListener('click', function() {
-                count = 0;
-                updateCounter();
-            });
-            
-            // Theme Switcher
-            const themeToggle = document.getElementById('theme-toggle');
-            const themeStatus = document.getElementById('theme-status');
-            
-            /**
-             * Toggles between light and dark themes
-             */
-            function toggleTheme() {
-                document.body.classList.toggle('dark-mode');
-                
-                if (document.body.classList.contains('dark-mode')) {
-                    themeStatus.textContent = 'Dark Mode';
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    themeStatus.textContent = 'Light Mode';
-                    localStorage.setItem('theme', 'light');
-                }
-            }
-            
-            // Check for saved theme preference
-            if (localStorage.getItem('theme') === 'dark') {
-                document.body.classList.add('dark-mode');
-                themeToggle.checked = true;
-                themeStatus.textContent = 'Dark Mode';
-            }
-            
-            // Handle theme toggle
-            themeToggle.addEventListener('change', toggleTheme);
         });
     </script>
 </body>
